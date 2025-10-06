@@ -33,7 +33,7 @@ exports.showGames = async (req, res) => {
 exports.addGame = async (req, res) => {
     try {
         // Obtener los datos proporcionados por el usuario
-        const { name, genre, status, platform, hoursPlayed } = req.body;
+        const { name, genre, status, platform, hoursPlayed, image } = req.body;
 
         // Validar si se proporciono al menos un nombre para el juego
         if (!name) {
@@ -61,6 +61,7 @@ exports.addGame = async (req, res) => {
             status,
             platform,
             hoursPlayed,
+            image,
         }).save();
 
         // Devolver respuesta al usuario
@@ -87,7 +88,7 @@ exports.addGame = async (req, res) => {
 exports.updateGame = async (req, res) => {
     try {
         // Obtener los datos proporcionados por el usuario
-        const { id, name, genre, status, platform, hoursPlayed } = req.body;
+        const { id, name, genre, status, platform, hoursPlayed, image } = req.body;
 
         // Verificar los datos proporcionados por el usuario
         if (!id) {
@@ -116,6 +117,7 @@ exports.updateGame = async (req, res) => {
         if (status) gameToUpdate.status = status;
         if (platform) gameToUpdate.platform = platform;
         if (hoursPlayed !== undefined) gameToUpdate.hoursPlayed = hoursPlayed;
+        if (image !== undefined) gameToUpdate.image = image;
 
         // Guardar los cambios en la base de datos
         await gameToUpdate.save();

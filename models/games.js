@@ -48,6 +48,12 @@ const gameSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    image: {
+        type: String,
+        required: true,
+        default:
+            "https://i.pinimg.com/1200x/68/3d/4b/683d4b62ef458b9ddd01b1227f900ec4.jpg",
+    },
 });
 
 
