@@ -145,3 +145,56 @@ exports.deleteReview = async (req, res) => {
         });
     }
 }
+
+// ======================================================================
+
+// Editar una reseña
+
+// Exportar la funcion 'updateReview'
+exports.updateReview = async (req, res) => {
+    try {
+        // Obtener los datos proporcionados por el usuario
+        const { idReview, reviewContent } = req.body;
+
+        // Verificar los datos proporcioandos por el usuario
+        if (!idReview || !reviewContent) {
+            // Devolver respuesta de error al usaurio
+            return res.json({
+                message: "Datos proporcionados incompletos",
+                status: "error",
+            });
+        }
+
+        // Obtener la reseña a editar de la base de datos
+        const reviewToUpdate = await Reviews.findOne({ _id: idReview });
+
+        // Verificar que si exista una reseña a editar
+        if (!reviewToUpdate) {
+            // Devolver respuesta de error al usuario
+            res.json({
+                message: "La reseña no existe",
+                status: "error",
+            });
+        }
+
+        // Editar el contenido de la reseña
+        reviewToUpdate.reviewContent = reviewContent;
+
+        // Actualizar la reseña en la base de datos
+        await reviewToUpdate.save();
+
+        // Devolver respuesta de exito al usuario
+        return res.json({
+            message: "Reseña editada exitosamente",
+            status: "success",
+        });
+    } catch (error) {
+        // Manejo de errores
+        // Imprimir y responder el error
+        console.log("Error: ", error);
+        return res.json({
+            message: `Error: ${error.message}`,
+            status: "error",
+        });
+    }
+};
