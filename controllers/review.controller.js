@@ -24,7 +24,7 @@ exports.showReviews = async (req, res) => {
         // del juego proporcionado por el usuario
         const gameReviews = await Reviews.find({ game: idGame });
 
-        // Devolver respuesta al usuario
+        // Devolver respuesta de exito al usuario
         return res.json({
             gameReviews: gameReviews,
         });
@@ -51,7 +51,7 @@ exports.addReview = async (req, res) => {
 
         // Verificar los datos proporcionados por el usuario
         if (!reviewContent || !idGame) {
-            // Devolver respuesta
+            // Devolver respuesta de error al usuario
             return res.json({
                 message: "Datos proporcionados incompletos",
                 status: "error",
@@ -61,13 +61,13 @@ exports.addReview = async (req, res) => {
         // Verificar el tamaño del contenido de la reseña
         switch (true) {
             case reviewContent.length < 20:
-                // Devolver respuesta al usuario
+                // Devolver respuesta de error al usuario
                 return res.json({
                     message: `El contenido introducido es demasiado pequeño. Mínimo requerido: 20 caracteres`,
                     status: "error",
                 });
             case reviewContent.length > 600:
-                // Devolver respuesta al usuario
+                // Devolver respuesta de error al usuario
                 return res.json({
                     message: `El contenido introducido es demasiado largo. Máximo permitido: 600 caracteres`,
                     status: "error",
@@ -80,7 +80,7 @@ exports.addReview = async (req, res) => {
             game: idGame,
         }).save();
 
-        // Devolver respuesta al usuario
+        // Devolver respuesta de exito al usuario
         return res.json({
             message: "Reseña realizada correctamente",
             status: "success",
@@ -95,3 +95,53 @@ exports.addReview = async (req, res) => {
         });
     }
 };
+
+// ======================================================================
+
+// Eliminar una reseña
+
+// Exportar la funcion 'deleteReview'
+exports.deleteReview = async (req, res) => {
+    try {
+        // Obtener los datos proporcionados por el usuario
+        const { idReview } = req.body;
+
+        // Verificar los datos proporcioandos por el usuario
+        if (!idReview) {
+            // Devolver respuesta de error al usaurio
+            return res.json({
+                message: "No se proporciono el id de la reseña a eliminar",
+                status: "error",
+            });
+        }
+
+        // Obtener la reseña a elimnar de la base de datos
+        const reviewToDelete = await Reviews.findOne({ _id: idReview})
+
+        // Verificar que si exista una reseña a eliminar
+        if (!reviewToDelete) {
+            // Devolver respuesta de error al usuario
+            res.json({
+                message: "La reseña no existe",
+                status: 'error'
+            });
+        }
+
+        // Eliminar la reseña mediante el id proporcionado
+        await Reviews.deleteOne({ _id: reviewToDelete._id });
+
+        // Devolver respuesta de exito al usuario
+        return res.json({
+            message: "Reseña eliminada correctamente",
+            status: "success",
+        });
+    } catch (error) {
+        // Manejo de errores
+        // Imprimir y responder el error
+        console.log("Error: ", error);
+        return res.json({
+            message: `Error: ${error}`,
+            status: "error",
+        });
+    }
+}

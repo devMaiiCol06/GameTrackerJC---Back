@@ -20,7 +20,7 @@ router.delete("/deleteGame", gameController.deleteGame);
 router.get("/showReviews", reviewController.showReviews);
 router.post("/addReview", reviewController.addReview);
 // router.put("/updateReview", reviewController.updateReview);
-// router.delete("/deleteReview", reviewController.deleteReview);
+router.delete("/deleteReview", reviewController.deleteReview);
 
 // ======================================================================
 
