@@ -10,19 +10,19 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 20,
-        maxLength: 600
+        maxLength: 600,
     },
     dateRegister: {
         type: Date,
         default: Date.now,
-        required: true
+        required: true,
     },
     game: {
-        type: Schema.Types.ObjectId,
-        required:true,
-        ref: 'Games'
-    }
-})
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Games",
+    },
+});
 
 // ======================================================================
 
