@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 // Modelo de una reseña
 const reviewSchema = new mongoose.Schema({
-    review: {
+    reviewContent: {
         type: String,
         required: true,
         minLength: 20,
