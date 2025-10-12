@@ -6,12 +6,15 @@ const mongoose = require("mongoose");
 
 // Modelo de un juego/s
 const gameSchema = new mongoose.Schema({
-    name: {
+    gameName: {
         type: String,
         required: true,
         unique: true,
     },
-    genre: {
+    gameDescription : {
+        type: String,
+    },
+    gameGenre: {
         type: String,
         enum: [
             "Action",
@@ -29,26 +32,29 @@ const gameSchema = new mongoose.Schema({
         ],
         required: true,
     },
-    status: {
+    gameStatus: {
         type: String,
-        enum: ["Completed", "In Progress"],
+        enum: ["Completed", "In Progress", "Wishlist"],
         default: "In Progress",
         required: true,
     },
-    platform: {
+    gamePlatform: {
         type: String,
         enum: ["PlayStation", "Xbox", "PC", "Nintendo Switch", "VR", "Phone"],
     },
-    dateRegister: {
+    gameDateRegister: {
         type: Date,
         default: Date.now,
         required: true,
     },
-    hoursPlayed: {
+    gameDateCompleted: {
+        type: Date,
+    },
+    gameHoursPlayed: {
         type: Number,
         default: 0,
     },
-    image: {
+    gameImage: {
         type: String,
         required: true,
         default:
