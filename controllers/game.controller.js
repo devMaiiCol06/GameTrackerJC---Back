@@ -63,7 +63,7 @@ exports.addGame = async (req, res) => {
         // Obtener fecha del juego completado
         let gameDateCompleted = ""
         gameStatus === "Completed"
-            ? gameDateCompleted = Date.now
+            ? gameDateCompleted = Date.now()
             : gameDateCompleted;
 
         // Agregar el nuevo juego a la base de datos
@@ -137,7 +137,7 @@ exports.updateGame = async (req, res) => {
         // Actualizar solo los campos del juego proporcionados
         // por el usuario
         if (gameName) gameToUpdate.gameName = gameName;
-        if (gameDescription) gameToUpdate.name = gameDescription;
+        if (gameDescription) gameToUpdate.gameDescription = gameDescription;
         if (gameGenre) gameToUpdate.gameGenre = gameGenre;
         if (gameStatus) gameToUpdate.gameStatus = gameStatus;
         if (gamePlatform) gameToUpdate.gamePlatform = gamePlatform;
