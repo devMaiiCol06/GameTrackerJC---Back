@@ -28,7 +28,7 @@ exports.showArchievs = async (req, res) => {
 // Agregar un nuevo logro
 
 // Exportar la funcion de 'addArchievs'
-exports.addArchievs = async (req, res) => {
+exports.addArchiev = async (req, res) => {
     try {
         // Obtener los datos proporcionados por el usuario
         const {

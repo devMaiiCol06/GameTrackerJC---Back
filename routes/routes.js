@@ -5,8 +5,9 @@ const router = express.Router();
 // ======================================================================
 
 // Importaciones de los Controladores
-const gameController = require('../controllers/game.controller')
+const gameController = require("../controllers/game.controller");
 const reviewController = require("../controllers/review.controller");
+const archievController = require("../controllers/archievements.controller");
 
 // ======================================================================
 
@@ -20,7 +21,11 @@ router.delete("/deleteGame", gameController.deleteGame);
 router.get("/showReviews", reviewController.showReviews);
 router.post("/addReview", reviewController.addReview);
 router.put("/updateReview", reviewController.updateReview);
-router.delete("/deleteReview", reviewController.deleteReview);
+
+// Rutas de Logros
+router.get("/showArchievs", archievController.showArchievs);
+router.post("/addArchiev", archievController.addArchiev);
+router.delete("/deleteArchiev", archievController.deleteArchiev);
 
 // ======================================================================
 
