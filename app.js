@@ -13,7 +13,7 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173', // Permite solo este origen
+  origin: '*', // Permite solo este origen
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Headers permitidos
 }));
